@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import * as contentful from 'contentful'
+import _ from 'lodash';
 
 import Movie from '../components/Movie'
 
@@ -9,25 +9,41 @@ class MoviesList extends Component {
 
     state = {
         movies: [],
-        searchString: ''
+        searchString: 'Ninja'
     }
     constructor() {
         super()
-        this.getMovies()
+        // this.getMovies = _.debounce(this.getMovies, 2000);
     }
-    getMovies = () => {
-        var allocine = require('allocine-api');
-        var vm = this;
-        allocine.api('search', { q: this.state.searchString, filter: 'movie' }, function (error, results) {
-            if (error) { console.log('Error : ' + error); return; }
-
-            console.log('Voici les données retournées par l\'API Allociné:');
-            console.log(results.feed.movie);
-            vm.setState({ movies: results.feed.movie })
-            console.log(vm.state.movies)
+    componentDidMount() {
+        this.getMovies()
+            .then(res => this.setState({ movies: res }))
+            .catch(err => console.log(err));
+    }
+    getMovies = async () => {
+        const response = await fetch('/api/movies', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ search: this.state.searchString }),
         });
 
-    }
+        const body = await response.json();
+        if (response.status !== 200) throw Error(body.message);
+        return body;
+    };
+    // getMovies = () => {
+    //     var vm = this;
+    // allocine.api('search', { q: this.state.searchString, filter: 'movie' }, function (error, results) {
+    //     if (error) { console.log('Error : ' + error); return; }
+
+    //     console.log('Voici les données retournées par l\'API Allociné:');
+    //     console.log(results.feed.movie);
+    //     vm.setState({ movies: results.feed.movie })
+    //     console.log(vm.state.movies)
+    // });
+    // }
     onSearchInputChange = (event) => {
         console.log("Search changed ..." + event.target.value)
         if (event.target.value) {
@@ -36,6 +52,8 @@ class MoviesList extends Component {
             this.setState({ searchString: '' })
         }
         this.getMovies()
+        .then(res => this.setState({ movies: res }))
+        .catch(err => console.log(err));
     }
     render() {
         return (

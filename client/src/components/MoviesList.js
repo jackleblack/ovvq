@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import _ from 'lodash';
 
 import Movie from '../components/Movie'
+import Movie2 from '../components/Movie2'
 
 class MoviesList extends Component {
 
@@ -69,7 +70,7 @@ class MoviesList extends Component {
                         <Grid container spacing={24} style={{ padding: 24 }}>
                             {this.state.movies.map(currentMovie => (
                                 <Grid item xs={12} sm={6} lg={4} xl={3}>
-                                    <Movie movie={currentMovie} />
+                                    <Movie2 movie={currentMovie} />
                                 </Grid>
                             ))}
                         </Grid>

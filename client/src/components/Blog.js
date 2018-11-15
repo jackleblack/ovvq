@@ -14,12 +14,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-import MoviesList from './components/MoviesList'
+import MoviesList from './movies/MoviesList';
+import PersonsList from './persons/PersonsList';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const Index = () => <h2>Home</h2>;
-const About = () => <h2>About</h2>;
-const Users = () => <h2>Users</h2>;
 
 const styles = theme => ({
   layout: {
@@ -83,16 +81,10 @@ const styles = theme => ({
 
 
 const sections = [
-  'Technology',
-  'Design',
-  'Culture',
-  'Business',
-  'Politics',
-  'Opinion',
-  'Science',
-  'Health',
-  'Style',
-  'Travel',
+  'Movies',
+  'Persons',
+  'Theaters',
+  'News'
 ];
 
 const featuredPosts = [
@@ -128,6 +120,45 @@ const archives = [
 
 const social = ['GitHub', 'Twitter', 'Facebook'];
 
+function Home() {
+  return (
+    <div>
+      <h2>Home</h2>
+    </div>
+  );
+}
+
+function Movies() {
+  return (
+    <div>
+      <MoviesList />
+    </div>
+  );
+}
+
+function Persons() {
+  return (
+    <div>
+      <PersonsList />
+    </div>
+  );
+}
+
+function Theaters() {
+  return (
+    <div>
+      <h2>Theaters</h2>
+    </div>
+  );
+}
+
+function News() {
+  return (
+    <div>
+      <h2>News</h2>
+    </div>
+  );
+}
 function Blog(props) {
   const { classes } = props;
 
@@ -154,14 +185,25 @@ function Blog(props) {
             Sign up
           </Button>
         </Toolbar>
-        <Toolbar variant="regular" className={classes.toolbarSecondary}>
-          {sections.map(section => (
-            <Typography color="inherit" noWrap key={section}>
-              {section}
-            </Typography>
-          ))}
-        </Toolbar>
-        {/* <Menu/> */}
+        <Router>
+          <div>
+          <Toolbar variant="regular" className={classes.toolbarSecondary}>
+          <Button component={Link} to="/home">
+                 Home
+                </Button>
+              {sections.map(section => (
+                <Button component={Link} to={section}>
+                  {section}
+                </Button>
+              ))}
+            </Toolbar>
+            <Route exact path="/" component={Home} />
+            <Route path="/movies" component={Movies} />
+            <Route path="/persons" component={Persons} />
+            <Route path="/theaters" component={Theaters} />
+            <Route path="/news" component={News} />
+          </div>
+        </Router>
         <main>
           {/* Main featured post */}
           <Paper className={classes.mainFeaturedPost}>
@@ -220,7 +262,6 @@ function Blog(props) {
                 From the Firehose
               </Typography>
               <Divider />
-              <MoviesList />
 
             </Grid>
             {/* End main content */}

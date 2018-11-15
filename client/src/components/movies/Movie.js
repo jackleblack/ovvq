@@ -46,7 +46,7 @@ const styles = theme => ({
   },
 });
 
-class RecipeReviewCard extends React.Component {
+class Movie extends React.Component {
   state = { expanded: false };
 
   handleExpandClick = () => {
@@ -134,8 +134,8 @@ class RecipeReviewCard extends React.Component {
   }
 }
 
-RecipeReviewCard.propTypes = {
+Movie.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(RecipeReviewCard);
+export default withStyles(styles)(Movie);

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Blog from './Blog';
 import * as serviceWorker from './serviceWorker';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -12,7 +13,7 @@ const theme = createMuiTheme(yourRawTheme);
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
-      <App />
+      <Blog />
     </MuiThemeProvider>
   , document.getElementById('root'));
 

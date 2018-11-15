@@ -3,7 +3,6 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import _ from 'lodash';
 
-import Movie from '../components/Movie'
 import Movie2 from '../components/Movie2'
 
 class MoviesList extends Component {

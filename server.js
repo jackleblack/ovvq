@@ -19,8 +19,9 @@ var allocine = require('allocine-api');
 app.post('/api/search', (req, res) => {
     allocine.api('search', { q: req.body.search, filter: req.body.filter }, function (error, results) {
         if (error) { console.log('Error : ' + error); return; }
-        console.log('Result call search:' , results.feed);
-        res.send(results.feed);
+        let searchResults = results.feed || results;
+        console.log('Result call search:' , searchResults);
+        res.send(searchResults);
     });
 });
 

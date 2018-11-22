@@ -86,7 +86,6 @@ const sections = [
   'Movies',
   'Persons',
   'Theaters',
-  'News'
 ];
 
 
@@ -137,7 +136,7 @@ function Blog(props) {
       <CssBaseline />
       <div className={classes.layout}>
         <Toolbar className={classes.toolbarMain}>
-          <Button size="small">Subscribe</Button>
+          {/* <Button size="small">Subscribe</Button> */}
           <Typography
             component="h2"
             variant="h5"
@@ -146,37 +145,37 @@ function Blog(props) {
             noWrap
             className={classes.toolbarTitle}
           >
-            Blog
+            On Va Voir Quoi ?
           </Typography>
-          <IconButton>
+          {/* <IconButton>
             <SearchIcon />
-          </IconButton>
-          <Button variant="outlined" size="small">
+          </IconButton> */}
+          {/* <Button variant="outlined" size="small">
             Sign up
-          </Button>
+          </Button> */}
         </Toolbar>
         <Router>
           <div>
-          <Toolbar variant="regular" className={classes.toolbarSecondary}>
-          <Button component={Link} to="/">
-                 Home
+            <div>
+              <Toolbar variant="regular" className={classes.toolbarSecondary}>
+                <Button component={Link} to="/">
+                  Home
                 </Button>
-              {sections.map(section => (
-                <Button component={Link} to={section}>
-                  {section}
-                </Button>
-              ))}
-            </Toolbar>
-            <Route exact path="/" component={Homes} />
-            <Route path="/movies" component={Movies} />
-            <Route path="/persons" component={Persons} />
-            <Route path="/theaters" component={Theaters} />
-            <Route path="/news" component={News} />
+                {sections.map(section => (
+                  <Button component={Link} to={section}>
+                    {section}
+                  </Button>
+                ))}
+              </Toolbar>
+            </div>
+            <main>
+              <Route exact path="/" component={Homes} />
+              <Route path="/movies" component={Movies} />
+              <Route path="/persons" component={Persons} />
+              <Route path="/theaters" component={Theaters} />
+            </main>
           </div>
         </Router>
-        <main>
-         
-        </main>
       </div>
       {/* Footer */}
       <footer className={classes.footer}>

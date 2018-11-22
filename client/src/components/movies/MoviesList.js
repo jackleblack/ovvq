@@ -9,7 +9,7 @@ import Badge from '@material-ui/core/Badge';
 class MoviesList extends Component {
     state = {
         movies: [],
-        searchString: 'Ninja',
+        searchString: '',
         totalResults: 0
     }
     constructor() {
@@ -49,10 +49,10 @@ class MoviesList extends Component {
             <div>
                 <div>
                     <div style={{ padding: 24 }}>
-                        <Badge badgeContent={this.state.totalResults} color="primary">
+                        <Badge badgeContent={this.state.totalResults} color="primary" invisible={this.state.totalResults === 0} >
                             <Grid container spacing={8} alignItems="flex-end">
                                 <Grid item>
-                                    <SearchIcon color="primary" invisible={this.state.totalResults == 0} />
+                                    <SearchIcon color="primary" />
                                 </Grid>
                                 <Grid item>
                                     <TextField

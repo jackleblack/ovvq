@@ -12,7 +12,8 @@
     "allocine-api": "^0.1.9",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"

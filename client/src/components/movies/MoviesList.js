@@ -1,29 +1,32 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
 import _ from 'lodash';
 import Movie from './Movie'
+import Badge from '@material-ui/core/Badge';
 
 class MoviesList extends Component {
     state = {
         movies: [],
-        searchString: 'Ninja'
+        searchString: 'Ninja',
+        totalResults: 0
     }
     constructor() {
         super()
     }
     componentDidMount() {
         this.getMovies()
-            .then(res => this.setState({ movies: res }))
+            .then(res => this.setState({ movies: res.movie }))
             .catch(err => console.log(err));
     }
     getMovies = async () => {
-        const response = await fetch('/api/movie', {
+        const response = await fetch('/api/search', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ search: this.state.searchString }),
+            body: JSON.stringify({ search: this.state.searchString, filter: 'movie' }),
         });
 
         const body = await response.json();
@@ -38,20 +41,32 @@ class MoviesList extends Component {
             this.setState({ searchString: '' })
         }
         this.getMovies()
-        .then(res => this.setState({ movies: res }))
-        .catch(err => console.log(err));
+            .then(res => this.setState({ movies: res.movie, totalResults: res.totalResults }))
+            .catch(err => console.log(err));
     }
     render() {
         return (
             <div>
-                {this.state.movies ? (
-                    <div>
-                        <TextField style={{ padding: 24 }}
-                            id="searchInput"
-                            placeholder="Search for Movies"
-                            margin="normal"
-                            onChange={this.onSearchInputChange}
-                        />
+                <div>
+                    <div style={{ padding: 24 }}>
+                        <Badge badgeContent={this.state.totalResults} color="primary">
+                            <Grid container spacing={8} alignItems="flex-end">
+                                <Grid item>
+                                    <SearchIcon color="primary" invisible={this.state.totalResults == 0} />
+                                </Grid>
+                                <Grid item>
+                                    <TextField
+                                        id="searchInput"
+                                        label="Search for Movies"
+                                        type="search"
+                                        onChange={this.onSearchInputChange}
+                                    />
+                                </Grid>
+                            </Grid>
+
+                        </Badge>
+                    </div>
+                    {this.state.movies ? (
                         <Grid container spacing={24} style={{ padding: 24 }}>
                             {this.state.movies.map(currentMovie => (
                                 <Grid item xs={12} sm={6} lg={4} xl={3}>
@@ -59,8 +74,8 @@ class MoviesList extends Component {
                                 </Grid>
                             ))}
                         </Grid>
-                    </div>
-                ) : "No movies found"}
+                    ) : "No movies found"}
+                </div>
             </div>
         )
     }

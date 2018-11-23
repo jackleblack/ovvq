@@ -26,7 +26,7 @@ const styles = {
 };
 
 
-class Theater extends React.Component {
+class TheaterListItem extends React.Component {
   state = { expanded: false };
 
   handleExpandClick = () => {
@@ -67,8 +67,8 @@ class Theater extends React.Component {
   }
 }
 
-Theater.propTypes = {
+TheaterListItem.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Theater);
+export default withStyles(styles)(TheaterListItem);

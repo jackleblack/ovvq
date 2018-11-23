@@ -20,7 +20,7 @@ const styles = {
   },
 };
 
-function MoviesNotFound(props) {
+function TheaterNotFound(props) {
   const { classes } = props;
   return (
     <Card className={classes.card}>
@@ -43,8 +43,8 @@ function MoviesNotFound(props) {
   );
 }
 
-MoviesNotFound.propTypes = {
+TheaterNotFound.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MoviesNotFound);
+export default withStyles(styles)(TheaterNotFound);

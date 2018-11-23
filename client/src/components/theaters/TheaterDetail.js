@@ -3,30 +3,30 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import React, { Component } from 'react';
-import Movie from './Movie';
-import MoviesNotFound from './MoviesNotFound';
+import TheaterNotFound from './TheaterNotFound';
+import TheaterListItem from './TheaterListItem';
 
-class MoviesList extends Component {
+class TheaterList extends Component {
     state = {
-        movies: [],
-        searchString: '',
+        theaters: [],
+        searchString: '13',
         totalResults: 0
     }
     constructor() {
         super()
     }
     componentDidMount() {
-        this.getMovies(this.state.searchString)
-            .then(res => this.setState({ movies: res.movie, totalResults: res.totalResults }))
+        this.getTheaters(this.state.searchString)
+            .then(res => this.setState({ theaters: res.theater, totalResults: res.totalResults }))
             .catch(err => console.log(err));
     }
-    getMovies = async (searchString) => {
+    getTheaters = async (searchString) => {
         const response = await fetch('/api/search', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ search: searchString, filter: 'movie' }),
+            body: JSON.stringify({ search: searchString, filter: 'theater' }),
         });
 
         const body = await response.json();
@@ -40,8 +40,8 @@ class MoviesList extends Component {
         } else {
             this.setState({ searchString: '' })
         }
-        this.getMovies(event.target.value)
-            .then(res => this.setState({ movies: res.movie, totalResults: res.totalResults }))
+        this.getTheaters(event.target.value)
+            .then(res => this.setState({ theaters: res.theater, totalResults: res.totalResults }))
             .catch(err => console.log(err));
     }
     render() {
@@ -57,7 +57,7 @@ class MoviesList extends Component {
                                 <Grid item>
                                     <TextField
                                         id="searchInput"
-                                        label="Search for Movies"
+                                        label="Search for Theaters"
                                         type="search"
                                         onChange={this.onSearchInputChange}
                                     />
@@ -66,20 +66,20 @@ class MoviesList extends Component {
 
                         </Badge>
                     </div>
-                    {this.state.movies ? (
+                    {this.state.theaters ? (
                         <Grid container spacing={24} style={{ padding: 24 }}>
-                            {this.state.movies.map(currentMovie => (
-                                <Grid key={currentMovie.code} item xs={12} sm={6} lg={4} xl={3}>
-                                    <Movie movie={currentMovie} />
+                            {this.state.theaters.map(currentTheater => (
+                                <Grid key={currentTheater.code} item xs={12} sm={6} lg={4} xl={3}>
+                                    <TheaterListItem theater={currentTheater} />
                                 </Grid>
                             ))}
                         </Grid>
                     ) : (
-                            <MoviesNotFound/>
+                            <TheaterNotFound/>
                         )}
                 </div>
             </div>
         )
     }
 }
-export default MoviesList;
+export default TheaterList;

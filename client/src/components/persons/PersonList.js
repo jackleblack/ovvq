@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import React, { Component } from 'react';
 import Person from './Person';
 
-class PersonsList extends Component {
+class PersonList extends Component {
     state = {
         persons: [],
         searchString: 'Ninja'
@@ -64,4 +64,4 @@ class PersonsList extends Component {
         )
     }
 }
-export default PersonsList;
+export default PersonList;

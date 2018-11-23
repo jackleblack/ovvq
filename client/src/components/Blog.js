@@ -5,12 +5,13 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link , NavLink } from "react-router-dom";
 // import TheatersList from './theaters/TheatersList';
 import Home from './Home';
-import MoviesList from './movies/MoviesList';
-import TheatersList from './theaters/TheatersList';
-import PersonsList from './persons/PersonsList';
+import MovieList from './movies/MovieList';
+import TheaterList from './theaters/TheaterList';
+import PersonList from './persons/PersonList';
+import TheaterDetail from './theaters/TheaterDetail';
 
 const styles = theme => ({
   layout: {
@@ -91,7 +92,7 @@ function Homes() {
 function Movies() {
   return (
     <div>
-      <MoviesList />
+      <MovieList />
     </div>
   );
 }
@@ -99,7 +100,7 @@ function Movies() {
 function Persons() {
   return (
     <div>
-      <PersonsList />
+      <PersonList />
     </div>
   );
 }
@@ -107,7 +108,7 @@ function Persons() {
 function Theaters() {
   return (
     <div>
-      <TheatersList />
+      <TheaterList />
     </div>
   );
 }
@@ -149,11 +150,11 @@ function Blog(props) {
           <div>
             <div>
               <Toolbar variant="regular" className={classes.toolbarSecondary}>
-                <Button component={Link} to="/">
+                <Button component={NavLink} to="/">
                   Home
                 </Button>
                 {sections.map(section => (
-                  <Button component={Link} to={section}>
+                  <Button component={NavLink} to={section}>
                     {section}
                   </Button>
                 ))}
@@ -163,8 +164,8 @@ function Blog(props) {
               <Route exact path="/" component={Homes} />
               <Route path="/movies" component={Movies} />
               <Route path="/persons" component={Persons} />
-              <Route path="/theaters" component={Theaters} />
-              <Route path={`/theaters/:theaterId`} component={Home}/>
+              <Route exact path="/theaters" component={Theaters} />
+              <Route path={`/theaters/:theaterId`} component={TheaterDetail}/>
             </main>
           </div>
         </Router>

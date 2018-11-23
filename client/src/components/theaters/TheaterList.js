@@ -3,10 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import React, { Component } from 'react';
-import Theater from './Theater';
-import TheatersNotFound from './TheatersNotFound';
+import TheaterNotFound from './TheaterNotFound';
+import TheaterListItem from './TheaterListItem';
 
-class TheatersList extends Component {
+class TheaterList extends Component {
     state = {
         theaters: [],
         searchString: '13',
@@ -70,16 +70,16 @@ class TheatersList extends Component {
                         <Grid container spacing={24} style={{ padding: 24 }}>
                             {this.state.theaters.map(currentTheater => (
                                 <Grid key={currentTheater.code} item xs={12} sm={6} lg={4} xl={3}>
-                                    <Theater theater={currentTheater} />
+                                    <TheaterListItem theater={currentTheater} />
                                 </Grid>
                             ))}
                         </Grid>
                     ) : (
-                            <TheatersNotFound/>
+                            <TheaterNotFound/>
                         )}
                 </div>
             </div>
         )
     }
 }
-export default TheatersList;
+export default TheaterList;

@@ -165,7 +165,7 @@ function Blog(props) {
               <Route path="/movies" component={Movies} />
               <Route path="/persons" component={Persons} />
               <Route exact path="/theaters" component={Theaters} />
-              <Route path={`/theaters/:theaterId`} component={TheaterDetail}/>
+              <Route path={`/theaters/:theaterCode`} component={TheaterDetail}/>
             </main>
           </div>
         </Router>

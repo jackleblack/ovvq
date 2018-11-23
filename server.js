@@ -26,9 +26,9 @@ app.post('/api/search', (req, res) => {
 });
 
 app.post('/api/showtimelist', (req, res) => {
-    allocine.api('showtimelist', { zip: '13170'}, function (error, results) {
+    allocine.api('showtimelist', { theaters: 'W1312'}, function (error, results) {
         if (error) { console.log('Error : ' + error); return; }
-        console.log('Result call showtimelist:' , results.feed);
+        console.log('Result call showtimelist:' , results);
         res.send(results.feed);
     });
 });

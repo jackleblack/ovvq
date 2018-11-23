@@ -12,9 +12,6 @@ class TheaterList extends Component {
         searchString: '13',
         totalResults: 0
     }
-    constructor() {
-        super()
-    }
     componentDidMount() {
         this.getTheaters(this.state.searchString)
             .then(res => this.setState({ theaters: res.theater, totalResults: res.totalResults }))

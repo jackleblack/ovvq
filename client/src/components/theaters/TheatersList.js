@@ -1,32 +1,32 @@
-import React, { Component } from 'react'
+import Badge from '@material-ui/core/Badge';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
-import _ from 'lodash';
-import Theater from './Theater'
-import Badge from '@material-ui/core/Badge';
+import React, { Component } from 'react';
+import Theater from './Theater';
+import TheatersNotFound from './TheatersNotFound';
 
 class TheatersList extends Component {
     state = {
         theaters: [],
-        searchString: '',
+        searchString: '13',
         totalResults: 0
     }
     constructor() {
         super()
     }
     componentDidMount() {
-        this.getTheaters()
-            .then(res => this.setState({ theaters: res.theater }))
+        this.getTheaters(this.state.searchString)
+            .then(res => this.setState({ theaters: res.theater, totalResults: res.totalResults }))
             .catch(err => console.log(err));
     }
-    getTheaters = async () => {
+    getTheaters = async (searchString) => {
         const response = await fetch('/api/search', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ search: this.state.searchString, filter: 'theater' }),
+            body: JSON.stringify({ search: searchString, filter: 'theater' }),
         });
 
         const body = await response.json();
@@ -40,7 +40,7 @@ class TheatersList extends Component {
         } else {
             this.setState({ searchString: '' })
         }
-        this.getTheaters()
+        this.getTheaters(event.target.value)
             .then(res => this.setState({ theaters: res.theater, totalResults: res.totalResults }))
             .catch(err => console.log(err));
     }
@@ -49,7 +49,7 @@ class TheatersList extends Component {
             <div>
                 <div>
                     <div style={{ padding: 24 }}>
-                        <Badge badgeContent={this.state.totalResults} color="primary" invisible={this.state.totalResults === 0} >
+                        <Badge badgeContent={this.state.totalResults} color="primary" invisible={!this.state.totalResults} >
                             <Grid container spacing={8} alignItems="flex-end">
                                 <Grid item>
                                     <SearchIcon color="primary" />
@@ -69,12 +69,14 @@ class TheatersList extends Component {
                     {this.state.theaters ? (
                         <Grid container spacing={24} style={{ padding: 24 }}>
                             {this.state.theaters.map(currentTheater => (
-                                <Grid item xs={12} sm={6} lg={4} xl={3}>
+                                <Grid key={currentTheater.code} item xs={12} sm={6} lg={4} xl={3}>
                                     <Theater theater={currentTheater} />
                                 </Grid>
                             ))}
                         </Grid>
-                    ) : "No theaters found"}
+                    ) : (
+                            <TheatersNotFound/>
+                        )}
                 </div>
             </div>
         )

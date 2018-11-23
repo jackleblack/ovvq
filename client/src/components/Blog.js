@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // import TheatersList from './theaters/TheatersList';
 import Home from './Home';
 import MoviesList from './movies/MoviesList';
+import TheatersList from './theaters/TheatersList';
 import PersonsList from './persons/PersonsList';
 
 const styles = theme => ({
@@ -106,7 +107,7 @@ function Persons() {
 function Theaters() {
   return (
     <div>
-      {/* <TheatersList /> */}
+      <TheatersList />
     </div>
   );
 }
@@ -163,6 +164,7 @@ function Blog(props) {
               <Route path="/movies" component={Movies} />
               <Route path="/persons" component={Persons} />
               <Route path="/theaters" component={Theaters} />
+              <Route path={`/theaters/:theaterId`} component={Home}/>
             </main>
           </div>
         </Router>

@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import _ from 'lodash';
-import Person from './Person'
+import React, { Component } from 'react';
+import Person from './Person';
 
 class PersonsList extends Component {
     state = {

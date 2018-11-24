@@ -10,21 +10,35 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import MovieFilterIcon from '@material-ui/icons/MovieFilter';
 import CameraRollIcon from '@material-ui/icons/Camera';
-import { Divider } from '@material-ui/core';
+import { Divider, withWidth } from '@material-ui/core';
 import moment from 'moment'
 import 'moment/locale/fr';
+import compose from 'recompose/compose';
 
 moment().locale('fr')
 
 const styles = theme => ({
   card: {
-    display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+    },
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex'
+    },
   },
   cardDetails: {
     flex: 1,
   },
   cardMedia: {
-    width: 160,
+   
+    [theme.breakpoints.down('sm')]: {
+      objectFit: 'cover',
+      objectPosition: 'top'
+    },
+    [theme.breakpoints.up('sm')]: {
+    
+      width: 160
+      
+    },
   },
   typographyInline: {
     display: 'inline-block'
@@ -36,17 +50,28 @@ function TheaterDetailShowtime(props) {
   moment.locale('fr'); // 'fr'
 
   return (
+
     <Card className={classes.card}>
-     {/* <Hidden xsDown> */}
+      <Hidden smUp>
+        <CardMedia
+          component="img"
+          height="220"
+          className={classes.cardMedia}
+          image={movieShowtimes.onShow.movie.poster.href}
+          title="Image title"
+        />
+      </Hidden>
+      <Hidden xsDown>
         <CardMedia
           className={classes.cardMedia}
           image={movieShowtimes.onShow.movie.poster.href}
           title="Image title"
         />
-      {/* </Hidden> */}
+      </Hidden>
       <div className={classes.cardDetails}>
+
         <CardContent>
-          <Typography component="h5" variant="h5" className={classes.typographyInline}>
+          <Typography component="h6" variant="h6" className={classes.typographyInline}>
             {movieShowtimes.onShow.movie.title}
             <Typography component="span" color="textPrimary" variant="overline" className={classes.typographyInline} style={{ marginLeft: 12 }}>
               {moment.utc(movieShowtimes.onShow.movie.runtime * 1000).format('HH [h] mm')}
@@ -55,8 +80,8 @@ function TheaterDetailShowtime(props) {
           <Typography variant="subtitle1" color="textSecondary">
             {movieShowtimes.onShow.movie.release &&
               moment(movieShowtimes.onShow.movie.release.releaseDate).format("DD MMMM YYYY")}
-              {movieShowtimes.onShow.movie.genre.map((currentGenre) => (
-               ' / '+ currentGenre.$ 
+            {movieShowtimes.onShow.movie.genre.map((currentGenre) => (
+              ' / ' + currentGenre.$
             ))}
           </Typography>
           <Typography variant="subtitle1" paragraph>
@@ -75,7 +100,7 @@ function TheaterDetailShowtime(props) {
               </Typography>
               <br />
               <Typography variant="subtitle2" color="secondary" >
-              {movieShowtimes.onShow.movie.castingShort.actors}
+                {movieShowtimes.onShow.movie.castingShort.actors}
                 {/* <Chip
                   label={movieShowtimes.onShow.movie.castingShort.actors}
                   className={classes.chip}
@@ -95,6 +120,11 @@ function TheaterDetailShowtime(props) {
 TheaterDetailShowtime.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+  width: PropTypes.string.isRequired,
+
 };
 
-export default withStyles(styles, { withTheme: true })(TheaterDetailShowtime);
+export default compose(
+  withStyles(styles),
+  withWidth(),
+)(TheaterDetailShowtime);

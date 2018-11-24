@@ -8,28 +8,9 @@ import TheaterDetailShowtime from './TheaterDetailShowtime';
 
 
 const styles = theme => ({
-    layout: {
-        width: 'auto',
-        marginLeft: theme.spacing.unit * 3,
-        marginRight: theme.spacing.unit * 3,
-        [theme.breakpoints.up(1500 + theme.spacing.unit * 3 * 2)]: {
-            width: 1500,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
-    toolbarMain: {
-        borderBottom: `1px solid ${theme.palette.grey[300]}`,
-    },
-    toolbarTitle: {
-        flex: 1,
-    },
-    toolbarSecondary: {
-        justifyContent: 'space-between',
-    },
     mainFeaturedPost: {
-        backgroundColor: theme.palette.grey[800],
-        color: theme.palette.common.white,
+        border: `3px solid ${theme.palette.secondary.light}` ,
+        color: theme.palette.secondary.contrastText,
         marginBottom: theme.spacing.unit * 4,
     },
     mainFeaturedPostContent: {
@@ -101,13 +82,11 @@ class TheaterDetail extends Component {
                             <Grid container>
                                 <Grid item md={6}>
                                     <div className={classes.mainFeaturedPostContent}>
-                                        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                                        <Typography component="h3" variant="h5" color="primary" gutterBottom>
                                             {this.state.theaterShowtimes.place.theater.name}
                                         </Typography>
                                         <Typography variant="h5" color="inherit" paragraph>
-                                            Multiple lines of text that form the lede, informing new readers quickly and
-                                            efficiently about what&apos;s most interesting in this post&apos;s contents…
-                  </Typography>
+                                        </Typography>
                                     </div>
                                 </Grid>
                             </Grid>
@@ -116,7 +95,6 @@ class TheaterDetail extends Component {
                             {this.state.theaterShowtimes.movieShowtimes.map((currentMovieShowtimes, index) => (
                                 <Grid item key={index} xs={12} md={6}>
                                     <TheaterDetailShowtime movieShowtimes={currentMovieShowtimes} />
-
                                 </Grid>
                             ))}
                         </Grid>

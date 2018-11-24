@@ -28,7 +28,7 @@ const styles = theme => ({
   },
   typographyInline: {
     display: 'inline-block'
-    },
+  },
 });
 
 function TheaterDetailShowtime(props) {
@@ -37,17 +37,27 @@ function TheaterDetailShowtime(props) {
 
   return (
     <Card className={classes.card}>
+     {/* <Hidden xsDown> */}
+        <CardMedia
+          className={classes.cardMedia}
+          image={movieShowtimes.onShow.movie.poster.href}
+          title="Image title"
+        />
+      {/* </Hidden> */}
       <div className={classes.cardDetails}>
         <CardContent>
-          <Typography component="h2" variant="h5" className={classes.typographyInline}>
+          <Typography component="h5" variant="h5" className={classes.typographyInline}>
             {movieShowtimes.onShow.movie.title}
-            <Typography component="span" color="textPrimary" variant="overline" className={classes.typographyInline} style={{ marginLeft : 12}}>
+            <Typography component="span" color="textPrimary" variant="overline" className={classes.typographyInline} style={{ marginLeft: 12 }}>
               {moment.utc(movieShowtimes.onShow.movie.runtime * 1000).format('HH [h] mm')}
             </Typography>
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             {movieShowtimes.onShow.movie.release &&
               moment(movieShowtimes.onShow.movie.release.releaseDate).format("DD MMMM YYYY")}
+              {movieShowtimes.onShow.movie.genre.map((currentGenre) => (
+               ' / '+ currentGenre.$ 
+            ))}
           </Typography>
           <Typography variant="subtitle1" paragraph>
           </Typography>
@@ -64,26 +74,20 @@ function TheaterDetailShowtime(props) {
                 }
               </Typography>
               <br />
-              <Typography variant="subtitle2" color="primary" >
-                <Chip
+              <Typography variant="subtitle2" color="secondary" >
+              {movieShowtimes.onShow.movie.castingShort.actors}
+                {/* <Chip
                   label={movieShowtimes.onShow.movie.castingShort.actors}
                   className={classes.chip}
                   color="secondary"
                   variant="outlined"
                   icon={<MovieFilterIcon />}
-                />
+                /> */}
               </Typography>
             </div>
           }
         </CardContent>
       </div>
-      <Hidden xsDown>
-        <CardMedia
-          className={classes.cardMedia}
-          image={movieShowtimes.onShow.movie.poster.href}
-          title="Image title"
-        />
-      </Hidden>
     </Card>
   );
 }

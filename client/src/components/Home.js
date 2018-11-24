@@ -13,25 +13,6 @@ import React from 'react';
 
 
 const styles = theme => ({
-    layout: {
-      width: 'auto',
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3,
-      [theme.breakpoints.up(1500 + theme.spacing.unit * 3 * 2)]: {
-        width: 1500,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      },
-    },
-    toolbarMain: {
-      borderBottom: `1px solid ${theme.palette.grey[300]}`,
-    },
-    toolbarTitle: {
-      flex: 1,
-    },
-    toolbarSecondary: {
-      justifyContent: 'space-between',
-    },
     mainFeaturedPost: {
       backgroundColor: theme.palette.grey[800],
       color: theme.palette.common.white,

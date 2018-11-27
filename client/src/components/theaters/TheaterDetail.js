@@ -5,8 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import TheaterDetailShowtime from './TheaterDetailShowtime';
-import { map, keyBy , filter} from "lodash";
-
+import { map, keyBy, filter } from "lodash";
+import { BrowserRouter as Router, Route, Link , NavLink } from "react-router-dom";
 const styles = theme => ({
     mainFeaturedPost: {
         border: `3px solid ${theme.palette.secondary.light}`,
@@ -94,7 +94,7 @@ class TheaterDetail extends Component {
                         <Grid container spacing={40} className={classes.cardGrid}>
                             {map(keyBy(this.state.theaterShowtimes.movieShowtimes, 'onShow.movie.code'), (currentMovieShowtime) => (
                                 <Grid item key={currentMovieShowtime.onShow.movie.code} xs={12} md={6}>
-                                    <TheaterDetailShowtime movieShowtime={currentMovieShowtime} groupedMovieShowTime={filter(this.state.theaterShowtimes.movieShowtimes,[ 'onShow.movie.code',currentMovieShowtime.onShow.movie.code] )}/>
+                                    <TheaterDetailShowtime movieShowtime={currentMovieShowtime} groupedMovieShowTime={filter(this.state.theaterShowtimes.movieShowtimes, ['onShow.movie.code', currentMovieShowtime.onShow.movie.code])} />
                                 </Grid>
                             ))}
                         </Grid>

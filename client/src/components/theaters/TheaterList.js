@@ -5,12 +5,19 @@ import SearchIcon from '@material-ui/icons/Search';
 import React, { Component } from 'react';
 import TheaterNotFound from './TheaterNotFound';
 import TheaterListItem from './TheaterListItem';
+import TheaterDetail from './TheaterDetail';
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 class TheaterList extends Component {
     state = {
         theaters: [],
         searchString: '13',
         totalResults: 0
+    }
+    constructor(props) {
+        super(props);
+        console.log(this.props);
+
     }
     componentDidMount() {
         this.getTheaters(this.state.searchString)
@@ -44,6 +51,7 @@ class TheaterList extends Component {
     render() {
         return (
             <div>
+                <Route path={`${this.props.match.url}/:theaterCode`} component={TheaterDetail} />
                 <div>
                     <div style={{ padding: 24 }}>
                         <Badge badgeContent={this.state.totalResults} color="primary" invisible={!this.state.totalResults} >
@@ -72,7 +80,7 @@ class TheaterList extends Component {
                             ))}
                         </Grid>
                     ) : (
-                            <TheaterNotFound/>
+                            <TheaterNotFound />
                         )}
                 </div>
             </div>

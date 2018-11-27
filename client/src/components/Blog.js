@@ -11,7 +11,6 @@ import Home from './Home';
 import MovieList from './movies/MovieList';
 import TheaterList from './theaters/TheaterList';
 import PersonList from './persons/PersonList';
-import TheaterDetail from './theaters/TheaterDetail';
 
 const styles = theme => ({
   layout: {
@@ -80,39 +79,6 @@ const sections = [
   'Theaters',
 ];
 
-
-function Homes() {
-  return (
-    <div>
-      <Home />
-    </div>
-  );
-}
-
-function Movies() {
-  return (
-    <div>
-      <MovieList />
-    </div>
-  );
-}
-
-function Persons() {
-  return (
-    <div>
-      <PersonList />
-    </div>
-  );
-}
-
-function Theaters() {
-  return (
-    <div>
-      <TheaterList />
-    </div>
-  );
-}
-
 function News() {
   return (
     <div>
@@ -161,11 +127,10 @@ function Blog(props) {
               </Toolbar>
             </div>
             <main>
-              <Route exact path="/" component={Homes} />
-              <Route path="/movies" component={Movies} />
-              <Route path="/persons" component={Persons} />
-              <Route exact path="/theaters" component={Theaters} />
-              <Route path={`/theaters/:theaterCode`} component={TheaterDetail}/>
+              <Route exact path="/" component={Home} />
+              <Route path="/movies" component={MovieList} />
+              <Route path="/persons" component={PersonList} />
+              <Route path="/theaters" component={TheaterList} />
             </main>
           </div>
         </Router>

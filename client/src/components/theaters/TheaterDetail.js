@@ -5,11 +5,11 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import TheaterDetailShowtime from './TheaterDetailShowtime';
-
+import { map, keyBy , filter} from "lodash";
 
 const styles = theme => ({
     mainFeaturedPost: {
-        border: `3px solid ${theme.palette.secondary.light}` ,
+        border: `3px solid ${theme.palette.secondary.light}`,
         color: theme.palette.secondary.contrastText,
         marginBottom: theme.spacing.unit * 4,
     },
@@ -63,7 +63,7 @@ class TheaterDetail extends Component {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ search: theaterCode, filter: 'theater' }),
+            body: JSON.stringify({ theather: theaterCode }),
         });
 
         const body = await response.json();
@@ -92,9 +92,9 @@ class TheaterDetail extends Component {
                             </Grid>
                         </Paper>
                         <Grid container spacing={40} className={classes.cardGrid}>
-                            {this.state.theaterShowtimes.movieShowtimes.map((currentMovieShowtimes, index) => (
-                                <Grid item key={index} xs={12} md={6}>
-                                    <TheaterDetailShowtime movieShowtimes={currentMovieShowtimes} />
+                            {map(keyBy(this.state.theaterShowtimes.movieShowtimes, 'onShow.movie.code'), (currentMovieShowtime) => (
+                                <Grid item key={currentMovieShowtime.onShow.movie.code} xs={12} md={6}>
+                                    <TheaterDetailShowtime movieShowtime={currentMovieShowtime} groupedMovieShowTime={filter(this.state.theaterShowtimes.movieShowtimes,[ 'onShow.movie.code',currentMovieShowtime.onShow.movie.code] )}/>
                                 </Grid>
                             ))}
                         </Grid>

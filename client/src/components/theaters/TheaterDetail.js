@@ -7,10 +7,11 @@ import React, { Component } from 'react';
 import TheaterDetailShowtime from './TheaterDetailShowtime';
 import { map, keyBy, filter } from "lodash";
 import { BrowserRouter as Router, Route, Link , NavLink } from "react-router-dom";
+import moment from 'moment';
+
 const styles = theme => ({
     mainFeaturedPost: {
-        border: `3px solid ${theme.palette.secondary.light}`,
-        color: theme.palette.secondary.contrastText,
+        color: theme.palette.primary.contrastText,
         marginBottom: theme.spacing.unit * 4,
     },
     mainFeaturedPostContent: {
@@ -63,7 +64,7 @@ class TheaterDetail extends Component {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ theather: theaterCode }),
+            body: JSON.stringify({ theater: theaterCode, date: moment().format('YYYY-MM-DD') }),
         });
 
         const body = await response.json();

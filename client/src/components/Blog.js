@@ -1,16 +1,11 @@
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { BrowserRouter as Router, Route, Link , NavLink } from "react-router-dom";
-// import TheatersList from './theaters/TheatersList';
-import Home from './Home';
-import MovieList from './movies/MovieList';
 import TheaterList from './theaters/TheaterList';
-import PersonList from './persons/PersonList';
+import { BrowserRouter as Router, Route, Link , NavLink } from "react-router-dom";
 
 const styles = theme => ({
   layout: {
@@ -98,7 +93,7 @@ function Blog(props) {
           <Typography
             component="h2"
             variant="h5"
-            color="inherit"
+            color="primary"
             align="center"
             noWrap
             className={classes.toolbarTitle}
@@ -115,7 +110,7 @@ function Blog(props) {
         <Router>
           <div>
             <div>
-              <Toolbar variant="regular" className={classes.toolbarSecondary}>
+              {/* <Toolbar variant="regular" className={classes.toolbarSecondary}>
                 <Button component={NavLink} to="/">
                   Home
                 </Button>
@@ -124,13 +119,14 @@ function Blog(props) {
                     {section}
                   </Button>
                 ))}
-              </Toolbar>
+              </Toolbar> */}
             </div>
             <main>
-              <Route exact path="/" component={Home} />
-              <Route path="/movies" component={MovieList} />
+              <Route exact path="/" component={TheaterList} />
+              <Route path="/theaters" component={TheaterList} /> */}
+              {/* <Route path="/movies" component={MovieList} />
               <Route path="/persons" component={PersonList} />
-              <Route path="/theaters" component={TheaterList} />
+              <Route path="/theaters" component={TheaterList} /> */}
             </main>
           </div>
         </Router>
@@ -138,10 +134,10 @@ function Blog(props) {
       {/* Footer */}
       {/* <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Give me hate, I made love
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          Handcrafted By JackLeBlack
         </Typography>
       </footer> */}
       {/* End footer */}

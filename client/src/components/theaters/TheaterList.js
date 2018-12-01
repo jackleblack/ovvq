@@ -7,6 +7,7 @@ import TheaterNotFound from './TheaterNotFound';
 import TheaterListItem from './TheaterListItem';
 import TheaterDetail from './TheaterDetail';
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import Demo from '../Demo';
 
 class TheaterList extends Component {
     state = {
@@ -14,10 +15,19 @@ class TheaterList extends Component {
         searchString: '13',
         totalResults: 0
     }
+
     constructor(props) {
         super(props);
         console.log(this.props);
-
+        this.getInnerRef = this.getInnerRef.bind(this);
+        this.getLocation = this.getLocation.bind(this);
+    }
+    innerRef;
+    getInnerRef(ref) {
+        this.innerRef = ref;
+    }
+    getLocation() {
+        this.innerRef && this.innerRef.getLocation();
     }
     componentDidMount() {
         this.getTheaters(this.state.searchString)
@@ -49,10 +59,20 @@ class TheaterList extends Component {
             .catch(err => console.log(err));
     }
     render() {
+        const { getInnerRef, getLocation } = this;
         return (
             <div>
                 <Route path={`${this.props.match.url}/:theaterCode`} component={TheaterDetail} />
                 <div>
+                    <Demo onError={error => console.log(error)} ref={getInnerRef} />
+
+                    <button
+                        className="pure-button pure-button-primary"
+                        onClick={getLocation}
+                        type="button"
+                    >
+                        Get location
+</button>
                     <div style={{ padding: 24 }}>
                         <Badge badgeContent={this.state.totalResults} color="primary" invisible={!this.state.totalResults} >
                             <Grid container spacing={8} alignItems="flex-end">

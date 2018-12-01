@@ -20,15 +20,35 @@ app.post('/api/search', (req, res) => {
     allocine.api('search', { q: req.body.search, filter: req.body.filter }, function (error, results) {
         if (error) { console.log('Error : ' + error); return; }
         let searchResults = results.feed || results;
-        console.log('Result call search:' , searchResults);
+        console.log('Result call search:', searchResults);
         res.send(searchResults);
     });
 });
 
 app.post('/api/showtimelist', (req, res) => {
-    allocine.api('showtimelist', { theaters: req.body.theater, date : req.body.date}, function (error, results) {
+    allocine.api('showtimelist', { theaters: req.body.theater, date: req.body.date }, function (error, results) {
         if (error) { console.log('Error : ' + error); return; }
-        console.log('Result call showtimelist:' , results);
+        console.log('Result call showtimelist:', results);
+        res.send(results.feed);
+    });
+});
+
+app.post('/api/theaterlist', (req, res) => {
+    var parameters = {};
+    if (req.body.zip !== undefined) {
+        parameters.zip = req.body.zip;
+    }
+    if (req.body.lat !== undefined) {
+        parameters.lat = req.body.lat;
+    }
+    if (req.body.long !== undefined) {
+        parameters.long = req.body.long;
+    }
+    console.log(parameters)
+    
+    allocine.api('theaterlist', parameters, function (error, results) {
+        if (error) { console.log('Error : ' + error); return; }
+        console.log('Result call theaterlist:', results);
         res.send(results.feed);
     });
 });

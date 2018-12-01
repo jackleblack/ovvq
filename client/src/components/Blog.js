@@ -123,7 +123,7 @@ function Blog(props) {
             </div>
             <main>
               <Route exact path="/" component={TheaterList} />
-              <Route path="/theaters" component={TheaterList} /> */}
+              <Route path="/theaters" component={TheaterList} />
               {/* <Route path="/movies" component={MovieList} />
               <Route path="/persons" component={PersonList} />
               <Route path="/theaters" component={TheaterList} /> */}

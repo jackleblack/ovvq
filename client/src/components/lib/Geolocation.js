@@ -10,7 +10,7 @@ const formatDegrees = (degrees, isLongitude) =>
         (((degrees < 0 ? (degrees = -degrees) : degrees) % 1) * 60)}' ${0 |
         (((degrees * 60) % 1) * 60)}" ${getDirection(degrees, isLongitude)}`;
 
-class Demo extends React.Component {
+class Geolocation extends React.Component {
     render() {
         const { props } = this;
         return (
@@ -18,7 +18,6 @@ class Demo extends React.Component {
                 style={{
                     fontSize: "large",
                     fontWeight: "bold",
-                    margin: "2rem",
                 }}
             >
                 {!props.isGeolocationAvailable ? (
@@ -27,7 +26,9 @@ class Demo extends React.Component {
                     <div>Geolocation is not enabled.</div>
                 ) : props.coords ? (
                     <div>
-                        You are at{" "}
+                        {/* lat : {props.coords.latitude}
+                        long : {props.coords.longitude} */}
+                        Vous êtes localisés au {" "}
                         <span className="coordinate">
                             {formatDegrees(props.coords.latitude, false)}
                         </span>,{" "}
@@ -49,11 +50,11 @@ class Demo extends React.Component {
     }
 }
 
-Demo.propTypes = { ...Demo.propTypes, ...geoPropTypes };
+Geolocation.propTypes = { ...Geolocation.propTypes, ...geoPropTypes };
 
 export default geolocated({
     positionOptions: {
         enableHighAccuracy: false,
     },
     userDecisionTimeout: 5000,
-})(Demo);
+})(Geolocation);

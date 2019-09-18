@@ -4,7 +4,7 @@ import './index.css';
 import Blog from './components/Blog';
 import * as serviceWorker from './serviceWorker';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import 'typeface-roboto';
+// import 'typeface-roboto';
 
 import yourRawTheme from './theme.json';
 
